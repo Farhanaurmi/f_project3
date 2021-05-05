@@ -1,3 +1,4 @@
 from django.contrib import admin
+from .models import Driver,CustomerUser
 
-# Register your models here.
+admin.site.register((Driver,CustomerUser))
