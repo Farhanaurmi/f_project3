@@ -32,5 +32,17 @@ class CustomerUser(models.Model):
         return self.user_name
 
 
+class Vehicle(models.Model):
+    brand=models.CharField(max_length=150)
+    model=models.CharField(max_length=150)
+    fare_per_km=models.IntegerField()
+    air_conditioned=models.BooleanField()
+    luggage_capacity=models.IntegerField()
+    number_of_seat=models.IntegerField()
+    front_image=models.ImageField(upload_to="Vehicles",null=True, blank=True)
+    side_image=models.ImageField(upload_to="Vehicles",null=True, blank=True)
+    back_image=models.ImageField(upload_to="Vehicles",null=True, blank=True)
 
+    def __str__(self):
+        return self.brand
 
