@@ -1,0 +1,16 @@
+<h1>Vehicle List</h1><br>
+
+{% for i in vehicles %}
+
+<h5>id: {{ i.vehicle_id }}</h5>
+<h3>brand: {{ i.brand }}</h3> 
+<h3>model: {{ i.model }}</h3> 
+<h3>fare per km: {{ i.fare_per_km }}</h3> 
+<h3>air conditioned: {{ i.air_conditioned }}</h3> 
+<h3>luggage capacity: {{ i.luggage_capacity }}</h3> 
+<h3>number of seat: {{ i.number_of_seat }}</h3> 
+<img src="{{ i.front_image.url }}" alt="a" width="100px"><br>
+<img src="{{ i.side_image.url }}" alt="a" width="100px"><br>
+<img src="{{ i.back_image.url }}" alt="a" width="100px">
+{% endfor %}
+

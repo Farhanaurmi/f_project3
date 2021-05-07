@@ -1,0 +1,10 @@
+<h1>Customer List</h1><br>
+
+{% for i in customerusers %}
+<h4>id: {{ i.User_Id}}</h4> 
+<h3>name: {{ i.user_name }}</h3>
+<h3>Mobile number: {{ i.mobile_no }}</h3> 
+<h3>wallet_amount: {{ i.wallet_amount }}</h3> 
+<h3>email: {{ i.email_id }}</h3> 
+
+{% endfor %}

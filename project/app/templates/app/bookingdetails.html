@@ -1,0 +1,22 @@
+<h1>Booking Details</h1><br>
+
+{% for i in bookingdetailss %}
+
+<h5>id: {{ i.booking_id }}</h5>
+<h3>trip type: {{ i.trip_type }}</h3> 
+<h3>pickup point: {{ i.pickup_point }}</h3> 
+<h3>pickup date time: {{ i.pickup_date_time}}</h3> 
+<h3>drop point: {{ i.drop_point }}</h3> 
+<h3>drop date: {{ i.drop_date }}</h3> 
+<h3>selected car: {{ i.selected_car }}</h3>
+<h3>name: {{ i.name }}</h3> 
+<h3>user id: {{ i.user_id }}</h3> 
+<h3>Mobile number: {{ i.mobile_no }}</h3> 
+<h3>approx km travelling: {{ i.approx_km_travelling }}</h3> 
+<h3>coupon: {{ i.coupon }}</h3> 
+<h3>coupon discount amount: {{ i.coupon_discount_amount }}</h3> 
+<h3>fare: {{ i.fare }}</h3> 
+<h3>advance payment medium: {{ i.advance_payment_medium }}</h3> 
+<h3>cash drop point: {{ i.cash_drop_point }}</h3> 
+<h3>transaction no: {{ i.transaction_no }}</h3> 
+{% endfor %}

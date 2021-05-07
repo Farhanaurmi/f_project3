@@ -1,0 +1,21 @@
+<h1>Driver List</h1><br>
+
+{% for i in drivers %}
+
+<h5>id: {{ i.driver_id }}</h5>
+<h3>name: {{ i.driver_name }}</h3> 
+<h3>Mobile number: {{ i.mobile_no }}</h3> 
+<h3>pin code: {{ i.pin_code }}</h3> 
+<h3>mohalla_or_village: {{ i.mohalla_or_village }}</h3> 
+<h3>district: {{ i.district }}</h3>
+<h3>state: {{ i.state }}</h3> 
+<h3>vehicle registration no: {{ i.vehicle_registration_no }}</h3> 
+<h3>vehicle brand: {{ i.vehicle_brand }}</h3> 
+<h3>vehicle model: {{ i.vehicle_model }}</h3> 
+<h3>insurance validity: {{ i.insurance_validity }}</h3> 
+<h3>insurance type: {{ i.insurance_type }}</h3> 
+<h3>registration year: {{ i.registration_year }}</h3> 
+<h3>km driven: {{ i.km_driven }}</h3> 
+<h3>status: {{ i.status }}</h3> 
+{% endfor %}
+

@@ -1,0 +1,15 @@
+<h1>Booking History</h1><br>
+
+{% for i in bookinghistorys %}
+
+<h5>id: {{ i.booking_history_id }}</h5>
+<h3>booking Date: {{ i.booking_Date }}</h3> 
+<h3>trip type: {{ i.trip_type }}</h3> 
+<h3>pickup date time: {{ i.pickup_date_time}}</h3> 
+<h3>drop date: {{ i.drop_date }}</h3> 
+<h3>km travelled: {{ i.km_travelled }}</h3>
+<h3>pickup point: {{ i.pickup_point }}</h3> 
+<h3>drop point: {{ i.drop_point }}</h3> 
+<h3>assigned driver: {{ i.assigned_driver }}</h3> 
+<h3>booked vehicle: {{ i.booked_vehicle }}</h3> 
+{% endfor %}
