@@ -65,7 +65,7 @@ class BookingHistory(models.Model):
     booked_vehicle=models.CharField(max_length=150)
 
     def __str__(self):
-        return self.booking_history_id
+        return self.booked_by_user
 
 class Admin(models.Model):
     name=models.CharField(max_length=50)
@@ -98,4 +98,4 @@ class BookingDetails(models.Model):
     transaction_no=models.CharField(max_length=100,null=True,blank=True) 
 
     def __str__(self):
-        return self.booking_id
+        return self.user_id

@@ -1,8 +1,11 @@
+<a href="/">Home</a>
 <h1>Driver List</h1><br>
 
 {% for i in drivers %}
 
-<h5>id: {{ i.driver_id }}</h5>
+<h3> <a href="{% url 'editdriver' i.driver_id %}">edit</a></h3> 
+<h3> <a href="{% url 'deletedriver' i.driver_id %}">delete</a></h3> 
+<h3> <a href="{% url 'createdriver' %}">Create</a></h3> 
 <h3>name: {{ i.driver_name }}</h3> 
 <h3>Mobile number: {{ i.mobile_no }}</h3> 
 <h3>pin code: {{ i.pin_code }}</h3> 

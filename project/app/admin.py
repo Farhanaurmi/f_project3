@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import Driver,CustomerUser,Vehicle
+from .models import *
 
-admin.site.register((Driver,CustomerUser,Vehicle))
+admin.site.register((Driver,CustomerUser,Vehicle,BookingHistory,BookingDetails,Admin))

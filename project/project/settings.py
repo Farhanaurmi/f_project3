@@ -97,9 +97,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
 ]
 
 
@@ -126,12 +123,14 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/images/'
 
+STATIC_ROOT = "/static"
 
 STATICFILES_DIRS=[
     BASE_DIR/ 'static'
 ]
 
 MEDIA_ROOT='static/images'
+LOGIN_URL = '/login'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

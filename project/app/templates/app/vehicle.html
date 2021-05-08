@@ -1,5 +1,6 @@
+<a href="/">Home</a>
 <h1>Vehicle List</h1><br>
-
+<a href="{% url 'createvehicle' %}">Create</a>
 {% for i in vehicles %}
 
 <h5>id: {{ i.vehicle_id }}</h5>

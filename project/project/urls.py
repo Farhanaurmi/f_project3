@@ -25,7 +25,7 @@ admin.site.site_title="SAFAR Admin Panel"
 admin.site.index_title="Welcome to SAFAR Admin Panel"
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('administrator/', admin.site.urls),
     path('', include('app.urls')),
     path('api/', include('api.urls')),
 ]
