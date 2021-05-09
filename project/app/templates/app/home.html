@@ -1,7 +1,13 @@
 <h1>Hello welcome home</h1>
 
 {% if user.is_authenticated %}
-Logged In as {{ user.username }}
+Logged In as {{ user.username }} <br>
+<a href="{% url 'driver' %}">Driver List</a><br>
+<a href="{% url 'customeruser' %}">Customer List</a><br>
+<a href="{% url 'vehicle' %}">Vehicle List</a><br>
+<a href="{% url 'users' %}">User List</a><br>
+<a href="{% url 'bookinghistory' %}">Booking History</a><br>
+
 <form action="{% url 'logoutuser' %}" method="POST">
 {% csrf_token %}
 <button type="submit">Logout</button>

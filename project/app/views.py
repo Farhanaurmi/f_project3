@@ -9,6 +9,7 @@ from .forms import *
 from .decorators import *
 
 
+
 @unauthenticated_user
 def loginuser(request):
     if request.method=='GET':
@@ -58,19 +59,31 @@ def home(request):
 @login_required
 @manager_only
 def driver(request):
-    drivers=Driver.objects.all()
+    if 'q' in request.GET:
+        q=request.GET['q']
+        drivers=Driver.objects.filter(driver_name__icontains=q)
+    else:
+        drivers=Driver.objects.all()
     return render(request,'app/driver.html' , {'drivers':drivers})
 
 @login_required
 @manager_only
 def vehicle(request):
-    vehicles=Vehicle.objects.all()
+    if 'q' in request.GET:
+        q=request.GET['q']
+        vehicles=Vehicle.objects.filter(brand__icontains=q)
+    else:
+        vehicles=Vehicle.objects.all()
     return render(request,'app/vehicle.html' , {'vehicles':vehicles})
 
 @login_required
 @manager_only
 def bookinghistory(request):
-    bookinghistorys=BookingHistory.objects.all()
+    if 'q' in request.GET:
+        q=request.GET['q']
+        bookinghistorys=BookingHistory.objects.filter(trip_type__icontains=q)
+    else:
+        bookinghistorys=BookingHistory.objects.all()
     return render(request,'app/bookinghistory.html' , {'bookinghistorys':bookinghistorys})
 
 @login_required
@@ -82,7 +95,11 @@ def bookingdetails(request):
 @login_required
 @manager_only
 def customeruser(request):
-    customerusers=CustomerUser.objects.all()
+    if 'q' in request.GET:
+        q=request.GET['q']
+        customerusers=CustomerUser.objects.filter(user_name__icontains=q)
+    else:
+        customerusers=CustomerUser.objects.all()
     return render(request,'app/customeruser.html' , {'customerusers':customerusers})
 
 @login_required
@@ -150,3 +167,6 @@ def createvehicle(request):
             return redirect('vehicle')
         except ValueError:
             return render(request, 'app/createvehicle.html', {'form':VehicleFrom()})
+
+
+

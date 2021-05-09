@@ -1,6 +1,9 @@
 <a href="/">Home</a>
 <h1>Customer List</h1><br>
-
+<form method="GET">
+    <input name="q" type="text" placeholder="Search">
+<button type="submit">Search</button>
+</form>
 {% for i in customerusers %}
 <h3>name:  <a href="{% url 'edituser' i.User_Id %}">{{ i.user_name }}</a></h3>
 <h3>Mobile number: {{ i.mobile_no }}</h3> 
