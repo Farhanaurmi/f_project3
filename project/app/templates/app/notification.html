@@ -1,0 +1,9 @@
+Hey i am notification
+<a href="{% url 'createnotification' %}">Create</a>
+{% for i in noti %}
+<h3> <a href="{% url 'deletenotification' i.id %}">delete</a></h3>
+<h3>title: {{ i.title }}</h3> 
+<h3>description: {{ i.description }}</h3> 
+<h3>type: {{ i.type }}</h3> 
+{% endfor %}
+

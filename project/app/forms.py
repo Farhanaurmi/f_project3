@@ -37,3 +37,13 @@ class VehicleFrom(ModelForm):
 		fields = '__all__'
 		exclude = ['vehicle_id']
 
+class NotificationFrom(ModelForm):
+	class Meta:
+		model = Notification
+		fields = '__all__'
+
+
+class CouponsFrom(ModelForm):
+	class Meta:
+		model = Coupons
+		fields = '__all__'

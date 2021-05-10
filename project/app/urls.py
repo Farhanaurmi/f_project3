@@ -11,11 +11,17 @@ urlpatterns = [
     path('vehicle', views.vehicle, name='vehicle'),
     path('createvehicle', views.createvehicle, name='createvehicle'),
     path('bookinghistory', views.bookinghistory, name='bookinghistory'),
-    path('bookingdetails', views.bookingdetails),
+    path('bookingdetails', views.bookingdetails, name='bookingdetails'),
     path('customeruser', views.customeruser, name='customeruser'),
     path('users', views.alluser, name='users'),
     path('signup', views.signupuser, name='signupuser'),
     path('logout', views.logoutuser, name='logoutuser'),
     path('login', views.loginuser, name='loginuser'),
+    path('notification', views.notification, name='notification'),
+    path('createnotification', views.createnotification, name='createnotification'), 
+    path('notification/<int:pk>/delete', views.deletenotification, name='deletenotification'),  
+    path('coupons', views.coupons, name='coupons'),
+    path('createcoupons', views.createcoupons, name='createcoupons'), 
+    path('coupons/<int:pk>/delete', views.deletecoupons, name='deletecoupons'),  
 
 ]

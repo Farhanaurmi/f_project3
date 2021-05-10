@@ -1,15 +1,287 @@
-<h1>Hello welcome home</h1>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
 
-{% if user.is_authenticated %}
-Logged In as {{ user.username }} <br>
-<a href="{% url 'driver' %}">Driver List</a><br>
-<a href="{% url 'customeruser' %}">Customer List</a><br>
-<a href="{% url 'vehicle' %}">Vehicle List</a><br>
-<a href="{% url 'users' %}">User List</a><br>
-<a href="{% url 'bookinghistory' %}">Booking History</a><br>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.2/metisMenu.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/3.3.7/css/sb-admin-2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
+  <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/416491/timeline.css">
 
-<form action="{% url 'logoutuser' %}" method="POST">
-{% csrf_token %}
-<button type="submit">Logout</button>
-</form>
-{% endif %}
+  <title>Safar Admin Panel</title>
+</head>
+<body>
+  
+  <div id="wrapper">
+
+
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+        <a class="navbar-brand" href="#">SAFAR ADMIN PANEL</a>
+      </div>
+  
+      <ul class="nav navbar-top-links navbar-right">
+  
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-user">
+            <li><a href="/administrator"><i class="fa fa-user fa-fw">
+
+            </i>
+             {% if user.is_authenticated %}
+             {{ user.username }}
+             {% endif %}
+            </a>
+            </li>
+            <li><a href="/administrator"><i class="fa fa-gear fa-fw"></i> Settings</a>
+            </li>
+            <li class="divider"></li>
+            <li><div id="licon"><i class="fa fa-sign-out fa-fw"></i></div>
+                {% if user.is_authenticated %}
+                <form action="{% url 'logoutuser' %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-link" id="lbtn">Logout</button>
+                    </form>
+                    {% endif %}
+            </li>
+          </ul>
+
+        </li>
+ 
+      </ul>
+
+  
+      <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+          <ul class="nav" id="side-menu">
+            <li>
+              <a href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+            </li>
+            <li>
+              <li>
+              <a href="{% url 'bookingdetails' %}"><i class="fa fa-dashboard fa-fw"></i> Manage Booking</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Coordination<span class="fa arrow"></span></a>
+              <ul class="nav nav-second-level">
+                <li>
+                  <a href="{% url 'vehicle' %}">Vehicles</a>
+                </li>
+                <li>
+                  <a href="{% url 'bookinghistory' %}">Booking History</a>
+                </li>
+                <li>
+                  <a href="#">Driver's Account Verification</a>
+                </li>
+                <li>
+                  <a href="{% url 'bookinghistory' %}">All Time Bookings</a>
+                </li>
+              </ul>
+
+            </li>
+       
+            
+          <li>
+              <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> User's<span class="fa arrow"></span></a>
+              <ul class="nav nav-second-level">
+                <li>
+                  <a href="{% url 'customeruser' %}">Customer's</a>
+                </li>
+                <li>
+                  <a href="{% url 'driver' %}">Driver's</a>
+                </li>
+                <li>
+                  <a href="{% url 'users' %}">Admin's</a>
+                </li>
+              </ul>
+            </li>
+            
+    
+           <li>
+              <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Categories<span class="fa arrow"></span></a>
+              <ul class="nav nav-second-level">
+                <li>
+                  <a href="{% url 'vehicle' %}">Vehicle Brand</a>
+                </li>
+                <li>
+                  <a href="{% url 'vehicle' %}">Vehicle Model</a>
+                </li>
+                <li>
+                  <a href="{% url 'vehicle' %}">Insurance type</a>
+                </li>
+              </ul>
+            </li>
+            
+            
+            
+            <li>
+              <a href="{% url 'coupons' %}"><i class="fa fa-table fa-fw"></i> Add coupons</a>
+            </li>
+  
+           
+        </div>
+
+      </div>
+
+    </nav>
+  
+    <div id="page-wrapper">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">Dashboard</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+      </div>
+      <!-- /.row -->
+      <a href="{% url 'bookingdetails' %}">
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-xs-9 text-center">
+                  <h4>Booking Request</h4>
+              
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+
+        <a href="/administrator">
+        <div class="col-lg-3 col-md-6">
+          <div class="panel panel-green">
+            <div class="panel-heading">
+              <div class="row">
+
+                <div class="col-xs-9 text-center">
+                  <h4>Manage User's (Admin)</h4> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </a>
+
+    <a href="/notification">
+        <div class="col-lg-3 col-md-6">
+          <div class="panel panel-yellow">
+            <div class="panel-heading">
+              <div class="row">
+               
+                <div class="col-xs-9 text-center">
+                  <h4>Send Notification</h4>
+              
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </a>
+
+    <a href="/">
+        <div class="col-lg-3 col-md-6">
+          <div class="panel panel-red">
+            <div class="panel-heading">
+              <div class="row">
+                
+                <div class="col-xs-9 text-center">
+                  <h4>Driver's Account Verify</h4>
+                  
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+    </a>
+
+    <a href="/createcoupons">
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-yellow">
+              <div class="panel-heading">
+                <div class="row">
+                  
+                  <div class="col-xs-9 text-center">
+                    <h4>Create Coupons</h4>
+                    
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </a>
+
+        
+          <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <div class="row">
+                  
+                  <div class="col-xs-9 text-center">
+                    <h4>Today</h4>
+                    
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+
+        
+          <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+              <div class="panel-heading">
+                <div class="row">
+                  
+                  <div class="col-xs-9 text-center">
+                    <h4>This week</h4>
+                    
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="panel panel-green">
+              <div class="panel-heading">
+                <div class="row">
+                  
+                  <div class="col-xs-9 text-center">
+                    <h4>This Month</h4>
+                    
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+      </div>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.2/metisMenu.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/3.3.7/js/sb-admin-2.js"></script>
+    <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+</body>
+</html>

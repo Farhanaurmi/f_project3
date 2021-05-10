@@ -1,0 +1,6 @@
+Hey i am coupon list
+<a href="{% url 'createcoupons' %}">Create</a>
+{% for i in noti %}
+<h3> <a href="{% url 'deletecoupons' i.id %}">delete</a></h3>
+<h3>coupon: {{ i.coupon }}</h3> 
+{% endfor %}

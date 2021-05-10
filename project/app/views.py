@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import *
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
@@ -57,7 +57,6 @@ def home(request):
     return render(request,'app/home.html')
 
 @login_required
-@manager_only
 def driver(request):
     if 'q' in request.GET:
         q=request.GET['q']
@@ -136,7 +135,7 @@ def edituser(request, pk):
 @manager_only
 def deletedriver(request, pk):
 	driver = Driver.objects.get(driver_id=pk)
-	if request.method == "POST":
+	if request.method == "GET":
 		driver.delete()
 		return redirect('driver')
 
@@ -169,4 +168,49 @@ def createvehicle(request):
             return render(request, 'app/createvehicle.html', {'form':VehicleFrom()})
 
 
+def notification(request):
+    noti=Notification.objects.all()
+    return render(request,'app/notification.html', {'noti':noti})
 
+
+@login_required
+@manager_only
+def createnotification(request):
+    form = NotificationFrom()
+    if request.method == 'POST':
+        form = NotificationFrom(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('notification')
+    return render(request,'app/createnotification.html', {'form':form})
+
+
+def deletenotification(request,pk):
+    obj=get_object_or_404(Notification,id=pk)
+    if request.method =='GET':
+        obj.delete()
+        return redirect('notification')
+
+
+def coupons(request):
+    noti=Coupons.objects.all()
+    return render(request,'app/coupons.html', {'noti':noti})
+
+
+@login_required
+@manager_only
+def createcoupons(request):
+    form = CouponsFrom()
+    if request.method == 'POST':
+        form = CouponsFrom(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('coupons')
+    return render(request,'app/createcoupons.html', {'form':form})
+
+
+def deletecoupons(request,pk):
+    obj=get_object_or_404(Coupons,id=pk)
+    if request.method =='GET':
+        obj.delete()
+        return redirect('coupons')

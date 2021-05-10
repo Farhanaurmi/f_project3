@@ -33,3 +33,14 @@ class BookingHistorySerializer(serializers.ModelSerializer):
         fields=['booking_history_id','trip_type','booking_Date','pickup_date_time','drop_date','km_travelled','pickup_point','drop_point','booked_by_user','assigned_driver','booked_vehicle']
 
 
+class NotificationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model=Notification
+        fields=['id','title','description','type']
+
+class CouponsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model=Coupons
+        fields=['id','coupon']

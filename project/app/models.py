@@ -99,3 +99,21 @@ class BookingDetails(models.Model):
 
     def __str__(self):
         return self.user_id
+
+
+
+class Notification(models.Model):
+    title=models.CharField(max_length=150) 
+    description=models.CharField(max_length=200) 
+    type=models.CharField(max_length=50) 
+
+    def __str__(self):
+        return self.title
+
+
+class Coupons(models.Model):
+    coupon=models.CharField(max_length=150) 
+
+    def __str__(self):
+        return self.coupon
+        
