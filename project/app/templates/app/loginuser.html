@@ -1,10 +1,46 @@
+{% load static %}
+{% load widget_tweaks %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="login-page">
+        <div class="form">
+          <form class="register-form" method="POST" action="/signup">
+            {% csrf_token %}
+            {{ form2.name|add_class:'input'|attr:"placeholder: Name" }}
+            {{ form2.username|add_class:'input'|attr:"placeholder: Username" }}
+            {{ form2.email|add_class:'input'|attr:"placeholder: Email" }}
+            {{ form2.contact_no|add_class:'input'|attr:"placeholder: Phone" }}
+            {{ form2.password1|add_class:'input'|attr:"placeholder: password" }}
+            {{ form2.password2|add_class:'input'|attr:"placeholder: confirm password" }}
 
-<h1>Login</h1>
-<h2>{{ error }}</h2>
-<form method="POST" >
-    {% csrf_token %}
-{{ form.as_p }}
+            <button>create</button>
+            <p class="message">Already registered? <a href="#">Sign In</a></p>
+          </form>
+          <form class="login-form" method="POST">
+            {% csrf_token %}
+            {{ error }} <br><br>
+            {{ form.username|add_class:'input'|attr:"placeholder: Username" }}
+            {{ form.password|add_class:'input'|attr:"placeholder: password" }}
+            <button>login</button>
+            <p class="message">               
+                Not registered? <a href="#">Create an account</a></p>
+          </form>
+        </div>
+      </div>
 
-<button type="submit">Login</button>
-</form>
-<a href="/signup">Sign Up</a>
+<script>
+          $('.message a').click(function(){
+         $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+      });
+</script>
+</body>
+</html>

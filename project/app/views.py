@@ -13,11 +13,11 @@ from .decorators import *
 @unauthenticated_user
 def loginuser(request):
     if request.method=='GET':
-        return render(request,'app/loginuser.html', {'form':AuthenticationForm()})
+        return render(request,'app/loginuser.html', {'form':AuthenticationForm(),'form2':CreateUserForm()})
     else:
         user= authenticate(request,username=request.POST['username'],password=request.POST['password'])
         if user is None:
-            return render(request,'app/loginuser.html', {'form':AuthenticationForm(),'error':'username and password did not match'})
+            return render(request,'app/loginuser.html', {'form':AuthenticationForm(),'error':'Enter Correct Info','form2':CreateUserForm()})
         else:
             login(request,user)
             return redirect('home')
@@ -31,7 +31,7 @@ def logoutuser(request):
 
 @unauthenticated_user
 def signupuser(request):
-	form = CreateUserForm()
+
 	if request.method == 'POST':
 		form = CreateUserForm(request.POST)
 		if form.is_valid():
@@ -48,7 +48,7 @@ def signupuser(request):
 			admin.save()
 			login(request,admin)
 			return redirect('home')			
-	return render(request, 'app/signupuser.html',{'form':form} )
+	return redirect('loginuser')
 
 
 
