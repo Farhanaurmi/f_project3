@@ -6,7 +6,7 @@
 </form>
 <a href="{% url 'createvehicle' %}">Create</a>
 {% for i in vehicles %}
-
+<a href="{% url 'deletevehicle' i.vehicle_id %}">delete</a>
 <h5>id: {{ i.vehicle_id }}</h5>
 <h3>brand: {{ i.brand }}</h3> 
 <h3>model: {{ i.model }}</h3> 

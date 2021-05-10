@@ -1,6 +1,51 @@
-Hey i am coupon list
-<a href="{% url 'createcoupons' %}">Create</a>
-{% for i in noti %}
-<h3> <a href="{% url 'deletecoupons' i.id %}">delete</a></h3>
-<h3>coupon: {{ i.coupon }}</h3> 
-{% endfor %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/driver.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <title>Safar Admin Panel</title>
+</head>
+<body>
+    
+    <section>
+        <h1>Coupon</h1><br>
+        <a href="/">Home</a>
+        <a href="{% url 'createcoupons' %}">Create</a>
+        <div class="tbl-content">
+          <table cellpadding="0" cellspacing="0" border="1">
+            <div class="tbl-header">
+                <thead>
+                    <tr>
+                      <th>Coupon</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                </div>
+            <tbody>
+              {% for i in coup %}
+            <tr>
+
+              <td>{{ i.coupon }}</td> 
+              <td><a href="{% url 'deletecoupons' i.id %}">delete</a></td>  
+
+            </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </section>
+      
+      
+<script>
+    // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
+</body>
+</html>

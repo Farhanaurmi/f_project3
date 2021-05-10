@@ -22,6 +22,10 @@ urlpatterns = [
     path('notification/<int:pk>/delete', views.deletenotification, name='deletenotification'),  
     path('coupons', views.coupons, name='coupons'),
     path('createcoupons', views.createcoupons, name='createcoupons'), 
-    path('coupons/<int:pk>/delete', views.deletecoupons, name='deletecoupons'),  
+    path('coupons/<int:pk>/delete', views.deletecoupons, name='deletecoupons'),
+    path('bookinghistory/<int:pk>/delete', views.deletebookinghistory, name='deletebookinghistory'),
+    path('vehicle/<int:pk>/delete', views.deletevehicle, name='deletevehicle'),
+    path('bookingdetails/<int:pk>/delete', views.deletebookingdetails, name='deletebookingdetails'),
+    path('customer/<int:pk>/delete', views.deletecustomer, name='deletecustomer'),  
 
 ]

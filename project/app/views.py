@@ -57,7 +57,6 @@ def home(request):
     return render(request,'app/home.html')
 
 @login_required
-@manager_only
 def driver(request):
     if 'q' in request.GET:
         q=request.GET['q']
@@ -185,17 +184,19 @@ def createnotification(request):
             return redirect('notification')
     return render(request,'app/createnotification.html', {'form':form})
 
-
+@login_required
+@manager_only
 def deletenotification(request,pk):
     obj=get_object_or_404(Notification,id=pk)
     if request.method =='GET':
         obj.delete()
         return redirect('notification')
 
-
+@login_required
+@manager_only
 def coupons(request):
-    noti=Coupons.objects.all()
-    return render(request,'app/coupons.html', {'noti':noti})
+    coup=Coupons.objects.all()
+    return render(request,'app/coupons.html', {'coup':coup})
 
 
 @login_required
@@ -209,9 +210,43 @@ def createcoupons(request):
             return redirect('coupons')
     return render(request,'app/createcoupons.html', {'form':form})
 
-
+@login_required
+@manager_only
 def deletecoupons(request,pk):
     obj=get_object_or_404(Coupons,id=pk)
     if request.method =='GET':
         obj.delete()
         return redirect('coupons')
+
+@login_required
+@manager_only
+def deletebookinghistory(request,pk):
+    obj=get_object_or_404(BookingHistory,booking_history_id=pk)
+    if request.method =='GET':
+        obj.delete()
+        return redirect('bookinghistory')
+
+@login_required
+@manager_only
+def deletevehicle(request,pk):
+    obj=get_object_or_404(Vehicle,vehicle_id=pk)
+    if request.method =='GET':
+        obj.delete()
+        return redirect('vehicle')
+
+@login_required
+@manager_only
+def deletebookingdetails(request,pk):
+    obj=get_object_or_404(BookingDetails,booking_id=pk)
+    if request.method =='GET':
+        obj.delete()
+        return redirect('bookingdetails')
+
+@login_required
+@manager_only
+def deletecustomer(request,pk):
+    obj=get_object_or_404(CustomerUser,User_Id=pk)
+    if request.method =='GET':
+        obj.delete()
+        return redirect('customeruser')
+

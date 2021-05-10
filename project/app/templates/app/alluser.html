@@ -1,9 +1,58 @@
-<a href="/">Home</a>
-<h1>All Users</h1><br>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/driver.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <title>Safar Admin Panel</title>
+</head>
+<body>
+    
+    <section>
+        <h1>Admin List</h1><br>
+        <a href="/">Home</a>
+        <form method="GET">
+            <input name="q" type="text" placeholder="Search">
+        <button type="submit">Search</button>
+        </form>
+        <div class="tbl-content">
+          <table cellpadding="0" cellspacing="0" border="1">
+            <div class="tbl-header">
+                <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Mobile number</th>
+                      <th>Email</th>
+                      <th>Manage role</th>
+                    </tr>
+                  </thead>
+                </div>
+            <tbody>
+              {% for i in admin %}
+            <tr>
 
-{% for i in admin %}
-<br>
-<h3>Name: {{ i.name }}</h3>
-<h3>Id: {{ i.contact_no }}</h3>
-<h3>Email: {{ i.email }}</h3>
-{% endfor %}
+              <td>{{ i.name }}</td> 
+              <td>{{ i.contact_no }}</td> 
+              <td>{{ i.email }}</td>  
+              <td><a href="/administrator/auth/group/">edit</a></td>
+
+            </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </section>
+      
+      
+<script>
+    // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
+</body>
+</html>

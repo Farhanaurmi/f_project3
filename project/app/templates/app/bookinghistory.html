@@ -1,20 +1,71 @@
-<a href="/">Home</a>
-<h1>Booking History</h1><br>
-<form method="GET">
-    <input name="q" type="text" placeholder="Search">
-<button type="submit">Search</button>
-</form>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/driver.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <title>Safar Admin Panel</title>
+</head>
+<body>
+    
+    <section>
+        <h1>Booking History</h1><br>
+        <a href="/">Home</a>
+        <form method="GET">
+            <input name="q" type="text" placeholder="Search">
+        <button type="submit">Search</button>
+        </form>
+        <div class="tbl-content">
+          <table cellpadding="0" cellspacing="0" border="1">
+            <div class="tbl-header">
+                <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Bookind Date</th>
+                      <th>Trip Type</th>
+                      <th>Pickup date</th>
+                      <th>Drop date</th>
+                      <th>Travelled(km)</th>
+                      <th>Pickup point</th>
+                      <th>Drop point</th>
+                      <th>Assigned Driver</th>
+                      <th>Booked vehicle</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                </div>
+            <tbody>
+              {% for i in bookinghistorys %}
+            <tr>
 
-{% for i in bookinghistorys %}
+              <td>{{ i.booking_history_id }}</td> 
+              <td>{{ i.booking_Date }}</td> 
+              <td>{{ i.trip_type }}</td> 
+              <td>{{ i.pickup_date_time}}</td> 
+              <td>{{ i.drop_date }}</td>
+              <td>{{ i.km_travelled }}</td> 
+              <td>{{ i.pickup_point }}</td> 
+              <td>{{ i.drop_point }}</td> 
+              <td>{{ i.assigned_driver }}</td> 
+              <td>{{ i.booked_vehicle }}</td> 
+              <td> <a href="{% url 'deletebookinghistory' i.booking_history_id %}">delete</a></td>
+            </tr>
+              {% endfor %}
 
-<h4>id: {{ i.booking_history_id }}</h4>
-<h3>booking Date: {{ i.booking_Date }}</h3> 
-<h3>trip type: {{ i.trip_type }}</h3> 
-<h3>pickup date time: {{ i.pickup_date_time}}</h3> 
-<h3>drop date: {{ i.drop_date }}</h3> 
-<h3>km travelled: {{ i.km_travelled }}</h3>
-<h3>pickup point: {{ i.pickup_point }}</h3> 
-<h3>drop point: {{ i.drop_point }}</h3> 
-<h3>assigned driver: {{ i.assigned_driver }}</h3> 
-<h3>booked vehicle: {{ i.booked_vehicle }}</h3> 
-{% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+      
+      
+<script>
+    // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
+</body>
+</html>
