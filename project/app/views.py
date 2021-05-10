@@ -57,6 +57,7 @@ def home(request):
     return render(request,'app/home.html')
 
 @login_required
+@manager_only
 def driver(request):
     if 'q' in request.GET:
         q=request.GET['q']
