@@ -1,29 +1,82 @@
-<a href="/">Home</a>
-<h1>Driver List</h1><br>
-<form method="GET">
-    <input name="q" type="text" placeholder="Search">
-<button type="submit">Search</button>
-</form>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/driver.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <title>Safar Admin Panel</title>
+</head>
+<body>
+    
+    <section>
+        <h1>Driver List</h1><br>
+        <a href="/">Home</a>
+        <form method="GET">
+            <input name="q" type="text" placeholder="Search">
+        <button type="submit">Search</button>
+        </form>
+        <h3> <a href="{% url 'createdriver' %}">Create</a></h3>
+        <div class="tbl-content">
+          <table cellpadding="0" cellspacing="0" border="1">
+            <div class="tbl-header">
+                <thead>
+                    <tr>
+                      <th>name</th>
+                      <th>phone</th>
+                      <th>pin code</th>
+                      <th>mohalla/village</th>
+                      <th>district</th>
+                      <th>state</th>
+                      <th>vehicle reg no</th>
+                      <th>vehicle brand</th>
+                      <th>vehicle model</th>
+                      <th>insurance validity</th>
+                      <th>insurance type</th>
+                      <th>registration year</th>
+                      <th>driven(km)</th>
+                      <th>status</th>
+                      <th>edit</th>
+                      <th>delete</th>
+                    </tr>
+                  </thead>
+                </div>
+            <tbody>
+              {% for i in drivers %}
+            <tr>
 
-<h3> <a href="{% url 'createdriver' %}">Create</a></h3> 
+              <td>{{ i.driver_name }}</td> 
+              <td>{{ i.mobile_no }}</td> 
+              <td>{{ i.pin_code }}</td> 
+              <td>{{ i.mohalla_or_village }}</td> 
+              <td>{{ i.district }}</td>
+              <td>{{ i.state }}</td> 
+              <td>{{ i.vehicle_registration_no }}</td> 
+              <td>{{ i.vehicle_brand }}</td> 
+              <td>{{ i.vehicle_model }}</td> 
+              <td>{{ i.insurance_validity }}</td> 
+              <td>{{ i.insurance_type }}</td> 
+              <td>{{ i.registration_year }}</td> 
+              <td>{{ i.km_driven }}</td> 
+              <td>{{ i.status }}</td> 
+              <td> <a href="{% url 'editdriver' i.driver_id %}">edit</a></td> 
+              <td> <a href="{% url 'deletedriver' i.driver_id %}">delete</a></td>
+            </tr>
+              {% endfor %}
 
-{% for i in drivers %}
-
-<h3> <a href="{% url 'editdriver' i.driver_id %}">edit</a></h3> 
-<h3> <a href="{% url 'deletedriver' i.driver_id %}">delete</a></h3>
-<h3>name: {{ i.driver_name }}</h3> 
-<h3>Mobile number: {{ i.mobile_no }}</h3> 
-<h3>pin code: {{ i.pin_code }}</h3> 
-<h3>mohalla_or_village: {{ i.mohalla_or_village }}</h3> 
-<h3>district: {{ i.district }}</h3>
-<h3>state: {{ i.state }}</h3> 
-<h3>vehicle registration no: {{ i.vehicle_registration_no }}</h3> 
-<h3>vehicle brand: {{ i.vehicle_brand }}</h3> 
-<h3>vehicle model: {{ i.vehicle_model }}</h3> 
-<h3>insurance validity: {{ i.insurance_validity }}</h3> 
-<h3>insurance type: {{ i.insurance_type }}</h3> 
-<h3>registration year: {{ i.registration_year }}</h3> 
-<h3>km driven: {{ i.km_driven }}</h3> 
-<h3>status: {{ i.status }}</h3> 
-{% endfor %}
-
+            </tbody>
+          </table>
+        </div>
+      </section>
+      
+      
+<script>
+    // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
+</body>
+</html>
