@@ -85,6 +85,7 @@ def bookinghistory(request):
         bookinghistorys=BookingHistory.objects.all()
     return render(request,'app/bookinghistory.html' , {'bookinghistorys':bookinghistorys})
 
+
 @login_required
 @manager_only
 def bookingdetails(request):
@@ -104,7 +105,11 @@ def customeruser(request):
 @login_required
 @manager_only
 def alluser(request):
-    admin = Admin.objects.all()
+    if 'q' in request.GET:
+        q=request.GET['q']
+        admin=Admin.objects.filter(name__icontains=q)
+    else:
+        admin = Admin.objects.all()
     return render(request,'app/alluser.html',{'admin':admin})
 
 @login_required
@@ -168,6 +173,8 @@ def createvehicle(request):
             return render(request, 'app/createvehicle.html', {'form':VehicleFrom()})
 
 
+@login_required
+@manager_only
 def notification(request):
     noti=Notification.objects.all()
     return render(request,'app/notification.html', {'noti':noti})

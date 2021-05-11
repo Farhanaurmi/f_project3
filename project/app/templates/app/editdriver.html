@@ -1,8 +1,88 @@
 
-<form method="POST" >
-    {% csrf_token %}
-{{ form.as_p }}
+{% load static %}
+{% load widget_tweaks %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <title>Safar Admin Panel</title>
+</head>
+<body>
+    
+    <div class="container">  
+          
+          <form method="POST" class="container" id="contact">
+            <h3>Edit Driver</h3>
+            <br>
+            {% csrf_token %}
+            <fieldset>
+                {{ form.driver_name|attr:"placeholder: Enter Driver Name" }}
+            </fieldset>
 
-<button type="submit">Update</button>
-</form>
+            <fieldset>
+                {{ form.mobile_no|attr:"placeholder: Enter Mobile Number" }}
+            </fieldset>
+            
+            <fieldset>
+                {{ form.pin_code|attr:"placeholder: Enter pin code" }}
+            </fieldset>
 
+            <fieldset>
+                {{ form.mohalla_or_village|attr:"placeholder: Enter Mohalla/Village" }}
+            </fieldset>
+
+            <fieldset>
+                {{ form.district|attr:"placeholder: Enter District" }}
+            </fieldset>
+
+            <fieldset>
+                {{ form.state|attr:"placeholder: Enter State" }}
+            </fieldset>
+
+            <fieldset>
+                {{ form.vehicle_registration_no|attr:"placeholder: Enter Vehicle Registration No" }}
+            </fieldset>
+
+            <fieldset>
+                {{ form.vehicle_brand|attr:"placeholder: Enter vehicle brand" }}
+            </fieldset>
+
+            <fieldset>
+                {{ form.vehicle_model|attr:"placeholder: Enter vehicle model" }}
+            </fieldset>
+
+            <fieldset>
+                {{ form.insurance_validity|attr:"placeholder: Enter insurance validity" }}
+            </fieldset>
+
+            <fieldset>
+                {{ form.insurance_type|attr:"placeholder: Enter insurance type" }}
+            </fieldset>
+
+            <fieldset>
+                {{ form.registration_year|attr:"placeholder: Enter registration year" }}
+            </fieldset>
+
+            <fieldset>
+                {{ form.km_driven|attr:"placeholder: Enter km driven" }}
+            </fieldset>
+
+            <fieldset>
+                {{ form.status|add_class:'input'|attr:"placeholder: Select Driver status" }}
+            </fieldset>
+            <br>
+        <button type="submit" id="contact-submit">Update</button>
+        
+            <a href="/driver" id="backbtn">Back</a>
+        
+        </form>
+        
+        
+
+        
+      </div>
+
+</body>
+</html>

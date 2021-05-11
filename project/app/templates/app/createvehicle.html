@@ -1,6 +1,52 @@
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-{{ form.as_p }}
+{% load static %}
+{% load widget_tweaks %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <title>Safar Admin Panel</title>
+</head>
+<body>
+    <div class="container">
+        <form class="container" id="contact" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3>Add Vehicle</h3>
+            <br>
+            <fieldset>
+                {{ form.brand|attr:"placeholder: Enter Brand" }}
+            </fieldset>
+            <fieldset>
+                {{ form.model|attr:"placeholder: Enter Model" }}
+            </fieldset>
+            <fieldset>
+                {{ form.fare_per_km|add_class:'input'|attr:"placeholder: Enter Fare per km" }}
+            </fieldset>
+            <fieldset>
+                {{ form.luggage_capacity|add_class:'input'|attr:"placeholder: Enter Luggage Capacity" }}
+            </fieldset>
+            <fieldset>
+                {{ form.number_of_seat|add_class:'input'|attr:"placeholder: Enter Number of seat" }}
+            </fieldset>
+            <fieldset>
+                {{ form.air_conditioned }} <strong>Air Condition</strong>
+            </fieldset>
+            <fieldset>
+                {{ form.front_image }}
+            </fieldset>
+            <fieldset>
+                {{ form.side_image }}
+            </fieldset>
+            <fieldset>
+                {{ form.back_image }}
+            </fieldset>
+            <br>
+        <button type="submit" id="contact-submit">Create</button>
 
-<button type="submit">Create</button>
-</form>
+            <a href="/vehicle" id="backbtn">Back</a>
+        </form>
+    </div>
+
+</body>
+</html>

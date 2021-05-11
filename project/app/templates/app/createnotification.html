@@ -1,6 +1,40 @@
-<form method="POST" >
-    {% csrf_token %}
-{{ form.as_p }}
+{% load static %}
+{% load widget_tweaks %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <title>Safar Admin Panel</title>
+</head>
+<body>
+    
+    <div class="container">  
+        <form id="contact" method="post">
+          <h3>Create Notification</h3>
+          <br>
+          <form method="POST" class="container">
+            {% csrf_token %}
+            <fieldset>
+                {{ form.title|attr:"placeholder: Enter Title" }}
+            </fieldset>
+            <fieldset>
+                {{ form.description|attr:"placeholder: Enter Description" }}
+            </fieldset>
+            <fieldset>
+                {{ form.type|attr:"placeholder: Enter Coupon Type" }}
+            </fieldset>
+        <button type="submit" id="contact-submit">Create</button>
+        
+            <a href="/notification" id="backbtn">Back</a>
+        
+        </form>
+        
+        
 
-<button type="submit">Create</button>
-</form>
+        
+      </div>
+
+</body>
+</html>

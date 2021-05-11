@@ -1,42 +1,17 @@
-body{
-  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-  background: linear-gradient(to right, #25c481, #25b7c4);
-}
-
-#wrapper{
-  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-  background: linear-gradient(to right, #25c481, #25b7c4);
-}
-
-#page-wrapper{
-  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-  background: linear-gradient(to right, #25c481, #25b7c4);
-}
-
-.navbar{
-  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-  background: linear-gradient(to right, #25c481, #25b7c4);
-}
-.navbar-top-links{
-  background: -webkit-linear-gradient(left, #25b7c4, #25b7c4);
-  background: linear-gradient(to right, #25b7c4, #25b7c4);
-}
-.sidebar{
-  background: -webkit-linear-gradient(left, #25c481, #25c481);
-  background: linear-gradient(to right, #25c481, #25c481);
-}
-
-.nav-second-level{
-  background: -webkit-linear-gradient(left, #25c481, #25c481);
-  background: linear-gradient(to right, #25c481, #25c481);
+#pan{
+  background: #2E8B57;
+  color: white;
+  border-color: #2E8B57;
 }
 
 .kk{
-  background: -webkit-linear-gradient(left, #25c481, #25c481);
-  background: linear-gradient(to right, #25c481, #25c481);
-  color: #0d47a1;
+  background: white;
+  color: #2E8B57;
 }
 
+.kk:hover{
+  color: #1c5534;
+}
 
 #morris-bar-chart {
   -webkit-transition: all 2s; /* Safari */

@@ -1,21 +1,108 @@
-<a href="/">Home</a>
-<h1>Vehicle List</h1><br>
-<form method="GET">
-    <input name="q" type="text" placeholder="Search">
-<button type="submit">Search</button>
-</form>
-<a href="{% url 'createvehicle' %}">Create</a>
-{% for i in vehicles %}
-<a href="{% url 'deletevehicle' i.vehicle_id %}">delete</a>
-<h5>id: {{ i.vehicle_id }}</h5>
-<h3>brand: {{ i.brand }}</h3> 
-<h3>model: {{ i.model }}</h3> 
-<h3>fare per km: {{ i.fare_per_km }}</h3> 
-<h3>air conditioned: {{ i.air_conditioned }}</h3> 
-<h3>luggage capacity: {{ i.luggage_capacity }}</h3> 
-<h3>number of seat: {{ i.number_of_seat }}</h3> 
-<img src="{{ i.front_image.url }}" alt="a" width="100px"><br>
-<img src="{{ i.side_image.url }}" alt="a" width="100px"><br>
-<img src="{{ i.back_image.url }}" alt="a" width="100px">
-{% endfor %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/driver.css' %}">
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <title>Safar Admin Panel</title>
+</head>
+<body>
+    
+    <section>
+        <h1>Vehicle List</h1><br>
+        
+        <br><br><br><br>
+        <div class="wrap">
+          <div class="search">
+            <form method="GET">
+              <input name="q" type="text" class="searchTerm" placeholder="Search with name">
+              <br>
+              <br>
+              <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+             </button>
+            </form>
+             
+          </div>
+       </div>
+       <br><br><br>
+       
+       <div style="display: inline;">
+        <a href="/" class="homebtn"><i class="fa fa-home fa-3x fa-inverse" aria-hidden="true" id="ic"></i></a>
 
+      <a href="{% url 'createvehicle' %}" class="homebtn crtbtn">
+        <i class="fa fa-plus fa-3x fa-inverse" aria-hidden="true"></i>
+      </a>
+      </div>
+       <br><br><br>
+
+        <div class="tbl-content">
+          <table cellpadding="0" cellspacing="0" border="1">
+            <div class="tbl-header">
+                <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Brand</th>
+                      <th>Model</th>
+                      <th>Fare(km)</th>
+                      <th>Air Condition</th>
+                      <th>Luggage capacity</th>
+                      <th>Number of seat</th>
+                      <th>Front Image</th>
+                      <th>Side Image</th>
+                      <th>Back Image</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                </div>
+            <tbody>
+              {% for i in vehicles %}
+            <tr>
+              <td>{{ i.vehicle_id }}</td> 
+              <td>{{ i.brand }}</td> 
+              <td>{{ i.model }}</td> 
+              <td>{{ i.fare_per_km }}</td> 
+              <td>{{ i.air_conditioned }}</td>
+              <td>{{ i.luggage_capacity }}</td> 
+              <td>{{ i.number_of_seat }}</td> 
+
+              <td> 
+                {% if i.front_image %}
+                <img src="{{ i.front_image.url }}" alt="a" width="100px"><br>
+                {% endif %}
+            </td>
+
+              <td>
+                {% if i.side_image %}
+                <img src="{{ i.side_image.url }}" alt="a" width="100px"><br>
+                {% endif %}
+              </td>
+
+              <td>
+                {% if i.back_image %}
+                <img src="{{ i.back_image.url }}" alt="a" width="100px">
+                {% endif %}
+              </td> 
+
+              <td> <a href="{% url 'deletevehicle' i.vehicle_id %}">delete</a></td>
+            </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </section>
+      
+      
+<script>
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
+</body>
+</html>

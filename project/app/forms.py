@@ -34,8 +34,9 @@ class CustomerUserFrom(ModelForm):
 class VehicleFrom(ModelForm):
 	class Meta:
 		model = Vehicle
-		fields = '__all__'
-		exclude = ['vehicle_id']
+		fields = ['brand','model','fare_per_km' ,'air_conditioned','luggage_capacity','number_of_seat','front_image','side_image','back_image']
+
+
 
 class NotificationFrom(ModelForm):
 	class Meta:
