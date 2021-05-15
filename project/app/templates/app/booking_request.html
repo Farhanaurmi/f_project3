@@ -1,0 +1,90 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/driver.css' %}">
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <title>Safar Admin Panel</title>
+</head>
+<body>
+    
+    <section>
+        <h1>Booking Request Details</h1><br>
+
+        <a href="/" class="homebtn"><i class="fa fa-home fa-3x fa-inverse" aria-hidden="true" id="ic"></i></a>
+        <br><br><br>
+
+
+        <div class="tbl-content">
+          <table cellpadding="0" cellspacing="0" border="1">
+            <div class="tbl-header">
+                <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>trip type</th>
+                      <th>pickup point</th>
+                      <th>pickup date time</th>
+                      <th>drop point</th>
+                      <th>Drop date</th>
+                      <th>selected car</th>
+                      <th>name</th>
+                      <th>user id</th>
+                      <th>Mobile number</th>
+                      <th>approx travelling(km)</th>
+                      <th>coupon</th>
+                      <th>coupon discount amount</th>
+                      <th>fare</th>
+                      <th>advance payment medium</th>
+                      <th>cash drop point</th>
+                      <th>transaction no</th>
+                      <th>Assign Driver</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                </div>
+            <tbody>
+              {% for i in bookingdetailss %}
+            <tr>
+
+              <td>{{ i.booking_id }}</td> 
+              <td>{{ i.trip_type }}</td> 
+              <td>{{ i.pickup_point }}</td> 
+              <td>{{ i.pickup_date_time}}</td> 
+              <td>{{ i.drop_point }}</td>
+              <td>{{ i.drop_date }}</td> 
+              <td>{{ i.selected_car }}</td> 
+              <td>{{ i.name }}</td> 
+              <td>{{ i.user_id }}</td> 
+              <td>{{ i.mobile_no }}</td> 
+              <td>{{ i.approx_km_travelling }}</td>
+              <td>{{ i.coupon }}</td>
+              <td>{{ i.coupon_discount_amount }}</td>
+              <td>{{ i.fare }}</td>
+              <td>{{ i.advance_payment_medium }}</td>
+              <td>{{ i.cash_drop_point }}</td>
+              <td>{{ i.transaction_no }}</td>
+              <td> <a href="{% url 'assigndriver' i.booking_id %}">Select</a></td> 
+              <td> <a href="{% url 'deletebookingdetails' i.booking_id %}">delete</a></td>
+            </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </section>
+      
+      
+<script>
+    // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
+</body>
+</html>

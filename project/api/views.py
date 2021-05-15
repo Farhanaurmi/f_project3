@@ -1,3 +1,4 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from rest_framework import generics ,  permissions, mixins, status
 from rest_framework.exceptions import ValidationError
@@ -7,13 +8,14 @@ from .Serializers import *
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("hello")
+    return JsonResponse({'Driver':'/api/driver','Customer':'/api/customeruser','vehicle':'/api/vehicle','bookingdetails':'/api/bookingdetails','bookinghistory':'/api/bookinghistory','notification':'/api/notification','coupons':'/api/coupons',})
+
 
 
 class DriverList(generics.ListCreateAPIView):
     queryset=Driver.objects.all()
     serializer_class=DriverSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
     def perform_create(self, serializer):
         serializer.save()
 

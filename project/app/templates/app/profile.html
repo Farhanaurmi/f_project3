@@ -1,0 +1,61 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+   
+    <title>Safar Admin Panel</title>
+</head>
+<body>
+    
+    
+
+    <aside class="profile-card">
+        <header>
+          <!-- here’s the avatar -->
+          <a href="/profile">
+            <img src="{% static 'images\146-1461473_default-profile-picture-transparent.png' %}" class="hoverZoomLink">
+          </a>
+      
+          <!-- the username -->
+          <h1>
+            {{ user.username }}
+                </h1>
+      
+          <!-- and role or location -->
+          <h2>
+            {{ user.profile.name }}
+                </h2>
+      
+        </header>
+      
+        <!-- bit of a bio; who are you? -->
+        <div class="profile-bio">
+      
+          <p>
+            {{ user.profile.contact_no }}       
+        </p>
+        <p>
+            {{ user.email }}
+        </p>
+      
+        </div>
+      
+        <!-- some social links to show off -->
+        <ul class="profile-social-links">
+          <li>
+            <a href="/">
+              <i class="fa fa-home fa-2x"></i>
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+
+
+</body>
+</html>

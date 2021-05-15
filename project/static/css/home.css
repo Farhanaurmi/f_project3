@@ -3,6 +3,9 @@
   color: white;
   border-color: #2E8B57;
 }
+#pan:hover{
+  background-color: gray;
+}
 
 .kk{
   background: white;
@@ -46,7 +49,7 @@
 }
 
 #h2{
-  color: rgb(39, 34, 34);
+  color: white;
 }
 
 #lbtn{
@@ -56,4 +59,22 @@
 }
 #licon{
   margin-left: 23px;
+}
+
+#aar:hover{
+  background-color: gray;
+}
+
+#aar:focus{
+  background-color: gray;
+}
+#aar:visited{
+  background-color: gray;
+}
+
+.bd{
+  border: 1px solid red;
+  width: 100%;
+  background-color: #1c5534;
+  color: red;
 }

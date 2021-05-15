@@ -1,11 +1,15 @@
 from rest_framework import serializers
+from rest_framework.fields import ReadOnlyField
 from app.models import *
 
 class DriverSerializer(serializers.ModelSerializer):
-    
+    status=serializers.ReadOnlyField()
     class Meta:
         model=Driver
         fields=['driver_id','driver_name','mobile_no','pin_code','mohalla_or_village','district','state','vehicle_registration_no','vehicle_brand','vehicle_model','insurance_validity','insurance_type','registration_year','km_driven','status']
+    
+
+
 
 class CustomerUserSerializer(serializers.ModelSerializer):
 
@@ -21,10 +25,10 @@ class VehicleSerializer(serializers.ModelSerializer):
                                                                 
 
 class BookingDetailsSerializer(serializers.ModelSerializer):
-
+    assign_driver = DriverSerializer(read_only=True)
     class Meta:
         model=BookingDetails
-        fields=['booking_id','trip_type','pickup_point','Pickup_date_time','drop_point','drop_date','selected_car','name','mobile_no','user_id','approx_km_travelling','coupon','coupon_discount_amount','fare','advance_payment_medium','cash_drop_point','transaction_no']                                                                                                                            
+        fields=['booking_id','trip_type','pickup_point','Pickup_date_time','drop_point','drop_date','selected_car','name','mobile_no','user_id','approx_km_travelling','coupon','coupon_discount_amount','fare','advance_payment_medium','cash_drop_point','transaction_no','assign_driver']                                                                                                                            
 
 class BookingHistorySerializer(serializers.ModelSerializer):
 
@@ -37,10 +41,10 @@ class NotificationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=Notification
-        fields=['id','title','description','type']
+        fields=['id','title','date','description','type']
 
 class CouponsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=Coupons
-        fields=['id','coupon']
+        fields=['id','date','coupon']

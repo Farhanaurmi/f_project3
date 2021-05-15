@@ -1,0 +1,34 @@
+
+{% load static %}
+{% load widget_tweaks %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <title>Safar Admin Panel</title>
+</head>
+<body>
+    
+    <div class="container">  
+          
+          <form method="POST" class="container" id="contact">
+            <h3>Assign Driver Driver</h3>
+            <br>
+            {% csrf_token %}
+            <fieldset>
+                {{ form.assign_driver|add_class:'input' }}
+            </fieldset>
+
+            <br>
+        <button type="submit" id="contact-submit">Accept</button>
+        
+            <a href="/bookingrequest" id="backbtn">Back</a>
+        
+        </form>
+     
+      </div>
+
+</body>
+</html>

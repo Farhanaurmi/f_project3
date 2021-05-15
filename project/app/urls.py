@@ -26,6 +26,13 @@ urlpatterns = [
     path('bookinghistory/<int:pk>/delete', views.deletebookinghistory, name='deletebookinghistory'),
     path('vehicle/<int:pk>/delete', views.deletevehicle, name='deletevehicle'),
     path('bookingdetails/<int:pk>/delete', views.deletebookingdetails, name='deletebookingdetails'),
-    path('customer/<int:pk>/delete', views.deletecustomer, name='deletecustomer'),  
+    path('customer/<int:pk>/delete', views.deletecustomer, name='deletecustomer'),
+    path('driversverify', views.drivers_verify, name='drivers_verify'),
+    path('bookingrequest', views.booking_request, name='booking_request'), 
+    path('assigndriver/<int:pk>', views.assigndriver, name='assigndriver'),   
+    path('profile', views.profile, name='profile'),
+    path('today', views.today, name='today'),
+    path('week', views.week, name='week'), 
+    path('month', views.month, name='month'), 
 
 ]
