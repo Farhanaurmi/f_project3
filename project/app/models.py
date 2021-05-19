@@ -4,6 +4,7 @@ from django.db.models.deletion import CASCADE
 from django.db.models.fields import DateField
 from django.utils.timezone import now
 from django.utils.crypto import get_random_string
+import uuid
 
 
 class Driver(models.Model):
@@ -38,6 +39,7 @@ class CustomerUser(models.Model):
     wallet_amount = models.CharField(max_length=10, null=True)
     email_id = models.EmailField(max_length=60, null=True, blank=True)
     #User_Id = models.CharField(max_length=10,unique=True)
+    refer= models.UUIDField(default=uuid.uuid4, editable=False)
 
     def User_Id(self):
         

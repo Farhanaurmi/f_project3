@@ -27,6 +27,15 @@ class CustomerUserList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save()
 
+
+class CustomerUserUpdateList(generics.UpdateAPIView):
+    queryset=CustomerUser.objects.all()
+    serializer_class=CustomerUserSerializer2
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    lookup_field='pk'
+    def perform_create(self, serializer):
+        serializer.save()
+
 class VehicleList(generics.ListCreateAPIView):
     queryset=Vehicle.objects.all()
     serializer_class=VehicleSerializer

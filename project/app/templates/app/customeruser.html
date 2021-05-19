@@ -46,6 +46,7 @@
                       <th>Mobile number</th>
                       <th>Wallet amount</th>
                       <th>Email</th>
+                      <th>Refer Code</th>
                       <th>Edit</th>
                       <th>Delete</th>
                     </tr>
@@ -59,6 +60,7 @@
               <td>{{ i.mobile_no }}</td> 
               <td>{{ i.wallet_amount }}</td>  
               <td>{{ i.email_id }}</td>
+              <td>{{ i.refer }}</td>
               <td><a href="{% url 'edituser' i.id %}">edit</td>
                 <td> <a href="{% url 'deletecustomer' i.id %}">delete</a></td>
 

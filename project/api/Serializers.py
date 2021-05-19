@@ -12,10 +12,15 @@ class DriverSerializer(serializers.ModelSerializer):
 
 
 class CustomerUserSerializer(serializers.ModelSerializer):
-
+    refer=serializers.ReadOnlyField()
     class Meta:
         model= CustomerUser
         fields='__all__'
+
+class CustomerUserSerializer2(serializers.ModelSerializer):
+    class Meta:
+        model= CustomerUser
+        fields=['wallet_amount']
 
 class VehicleSerializer(serializers.ModelSerializer):
 
@@ -54,3 +59,5 @@ class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model=Contact
         fields=['phone','email']
+
+
