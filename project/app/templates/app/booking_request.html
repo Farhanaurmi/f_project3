@@ -43,7 +43,7 @@
                       <th>cash drop point</th>
                       <th>transaction no</th>
                       <th>Assign Driver</th>
-                      <th>Delete</th>
+                      <th>Reject</th>
                     </tr>
                   </thead>
                 </div>
@@ -69,7 +69,7 @@
               <td>{{ i.cash_drop_point }}</td>
               <td>{{ i.transaction_no }}</td>
               <td> <a href="{% url 'assigndriver' i.booking_id %}">Select</a></td> 
-              <td> <a href="{% url 'deletebookingdetails' i.booking_id %}">delete</a></td>
+              <td> <a href="{% url 'rejectdriver' i.booking_id %}">Rejcet</a></td>
             </tr>
               {% endfor %}
 

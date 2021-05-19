@@ -46,6 +46,7 @@
             <div class="tbl-header">
                 <thead>
                     <tr>
+                      <th>Driver ID</th>
                       <th>name</th>
                       <th>phone</th>
                       <th>pin code</th>
@@ -55,8 +56,9 @@
                       <th>vehicle reg no</th>
                       <th>vehicle brand</th>
                       <th>vehicle model</th>
-                      <th>insurance validity</th>
                       <th>insurance type</th>
+                      <th>insurance validity</th>
+                      
                       <th>registration year</th>
                       <th>driven(km)</th>
                       <th>status</th>
@@ -68,7 +70,7 @@
             <tbody>
               {% for i in drivers %}
             <tr>
-
+              <td>{{ i.unid }}</td>
               <td>{{ i.driver_name }}</td> 
               <td>{{ i.mobile_no }}</td> 
               <td>{{ i.pin_code }}</td> 
@@ -78,8 +80,9 @@
               <td>{{ i.vehicle_registration_no }}</td> 
               <td>{{ i.vehicle_brand }}</td> 
               <td>{{ i.vehicle_model }}</td> 
-              <td>{{ i.insurance_validity }}</td> 
               <td>{{ i.insurance_type }}</td> 
+              <td>{{ i.insurance_validity }}</td> 
+              
               <td>{{ i.registration_year }}</td> 
               <td>{{ i.km_driven }}</td> 
               <td>{{ i.status }}</td> 

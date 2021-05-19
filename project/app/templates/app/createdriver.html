@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/form.css' %}">
     <title>Safar Admin Panel</title>
 </head>
+
 <body>
     
     <div class="container">  
@@ -16,6 +17,9 @@
             <h3>Add Driver</h3>
             <br>
             {% csrf_token %}
+
+            
+
             <fieldset>
                 {{ form.driver_name|attr:"placeholder: Enter Driver Name" }}
             </fieldset>
@@ -44,20 +48,21 @@
                 {{ form.vehicle_registration_no|attr:"placeholder: Enter Vehicle Registration No" }}
             </fieldset>
 
-            <fieldset>
-                {{ form.vehicle_brand|attr:"placeholder: Enter vehicle brand" }}
+            <fieldset><div>Vehicle Brand</div>
+                {{ form.vehicle_brand|add_class:'input'|attr:"placeholder: Enter vehicle brand" }}
             </fieldset>
 
-            <fieldset>
-                {{ form.vehicle_model|attr:"placeholder: Enter vehicle model" }}
+            <fieldset><div>Vehicle Model</div>
+                {{ form.vehicle_model|add_class:'input'|attr:"placeholder: Enter vehicle model" }}
             </fieldset>
 
+            <fieldset><div>Insurance Type</div>
+                {{ form.insurance_type|add_class:'input'|attr:"placeholder: Enter insurance type" }}
+            </fieldset>
+
+            
             <fieldset>
                 {{ form.insurance_validity|attr:"placeholder: Enter insurance validity" }}
-            </fieldset>
-
-            <fieldset>
-                {{ form.insurance_type|attr:"placeholder: Enter insurance type" }}
             </fieldset>
 
             <fieldset>
@@ -68,7 +73,7 @@
                 {{ form.km_driven|attr:"placeholder: Enter km driven" }}
             </fieldset>
 
-            <fieldset>
+            <fieldset><div>Status</div>
                 {{ form.status|add_class:'input'|attr:"placeholder: Select Driver status" }}
             </fieldset>
             <br>

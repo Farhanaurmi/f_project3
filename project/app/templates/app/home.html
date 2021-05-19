@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
   <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/416491/timeline.css">
 
+  <link rel="icon" type="image/png"  href="{% static 'images/logo/LOGO SAFAR.png' %}">
+
   <title>Safar Admin Panel</title>
 </head>
 <body>
@@ -27,7 +29,9 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                   </button>
-        <a class="navbar-brand" href="/"><div id="h2">SAFAR ADMIN PANEL</div></a>
+        <a class="navbar-brand" href="/"><div id="h2"> 
+          <img src="{% static 'images/logo/LOGO SAFAR.png' %}" width="32">
+          SAFAR ADMIN PANEL</div></a>
       </div>
   
       <ul class="nav navbar-top-links navbar-right">
@@ -74,7 +78,7 @@
             </li>
             <li>
               <li>
-              <a href="{% url 'bookingdetails' %}" class="kk"><i class="fa fa-cogs fa-fw" aria-hidden="true"></i> 
+              <a href="{% url 'booking_request' %}" class="kk"><i class="fa fa-cogs fa-fw" aria-hidden="true"></i> 
                 <strong>Manage Booking</strong>
             </a>
             </li>
@@ -87,7 +91,7 @@
                   <a href="{% url 'vehicle' %}" class="kk">Vehicles</a>
                 </li>
                 <li>
-                  <a href="{% url 'bookinghistory' %}" class="kk">Booking History</a>
+                  <a href="{% url 'aftercompleted' %}" class="kk">Booking History</a>
                 </li>
                 <li>
                   <a href="/driversverify" class="kk">Driver's Account Verification</a>
@@ -124,13 +128,13 @@
                 <span class="fa arrow"></span></a>
               <ul class="nav nav-second-level">
                 <li>
-                  <a href="{% url 'vehicle' %}" class="kk">Vehicle Brand</a>
+                  <a href="{% url 'brand' %}" class="kk">Vehicle Brand</a>
                 </li>
                 <li>
-                  <a href="{% url 'vehicle' %}" class="kk">Vehicle Model</a>
+                  <a href="{% url 'brandmodel' %}" class="kk">Vehicle Model</a>
                 </li>
                 <li>
-                  <a href="{% url 'vehicle' %}" class="kk">Insurance type</a>
+                  <a href="{% url 'insurance' %}" class="kk">Insurance type</a>
                 </li>
               </ul>
             </li>
@@ -142,6 +146,19 @@
                 <strong>Add coupons</strong>
             </a>
             </li>
+
+            <li>
+              <a href="/editcontact" class="kk"><i class="fa fa-phone-square fa-fw" aria-hidden="true"></i> 
+                <strong>Edit Contact</strong>
+            </a>
+            </li>
+
+            <li>
+              <a href="/createfrompoint" class="kk"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i> 
+                <strong>From Point</strong>
+            </a>
+            </li>
+
   
            
         </div>

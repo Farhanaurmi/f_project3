@@ -1,0 +1,38 @@
+
+{% load static %}
+{% load widget_tweaks %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <title>Safar Admin Panel</title>
+</head>
+<body>
+    
+    <div class="container">  
+          
+          <form method="POST" class="container" id="contact">
+            <h3>Edit Contact</h3>
+            <br>
+            {% csrf_token %}
+
+            <fieldset>
+                {{ form.phone|attr:"placeholder: Enter Phone Number" }}
+            </fieldset>
+            <fieldset>
+                {{ form.email|attr:"placeholder: Enter Email" }}
+            </fieldset>
+
+            <br>
+        <button type="submit" id="contact-submit">Update</button>
+        
+            <a href="/" id="backbtn">Back</a>
+        
+        </form>
+     
+      </div>
+
+</body>
+</html>

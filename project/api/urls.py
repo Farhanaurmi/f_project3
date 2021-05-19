@@ -10,4 +10,5 @@ urlpatterns = [
     path('bookinghistory', views.BookingHistoryList.as_view()),
     path('notification', views.notificationList.as_view()),
     path('coupons', views.CouponsList.as_view()),
+    path('contact', views.contactList.as_view()),
 ]

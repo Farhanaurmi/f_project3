@@ -14,11 +14,11 @@
             {% csrf_token %}
             <h3>Add Vehicle</h3>
             <br>
-            <fieldset>
-                {{ form.brand|attr:"placeholder: Enter Brand" }}
+            <fieldset><div>Brand</div>
+                {{ form.brand|add_class:'input'|attr:"placeholder: Enter Brand" }}
             </fieldset>
-            <fieldset>
-                {{ form.model|attr:"placeholder: Enter Model" }}
+            <fieldset><div>Model</div>
+                {{ form.model|add_class:'input'|attr:"placeholder: Enter Model" }}
             </fieldset>
             <fieldset>
                 {{ form.fare_per_km|add_class:'input'|attr:"placeholder: Enter Fare per km" }}
@@ -29,17 +29,17 @@
             <fieldset>
                 {{ form.number_of_seat|add_class:'input'|attr:"placeholder: Enter Number of seat" }}
             </fieldset>
-            <fieldset>
+            <fieldset class="input">
                 {{ form.air_conditioned }} <strong>Air Condition</strong>
             </fieldset>
-            <fieldset>
-                {{ form.front_image }}
+            <fieldset style="font-weight: bold;" class="input">
+                 Front Image {{ form.front_image }}
             </fieldset>
-            <fieldset>
-                {{ form.side_image }}
+            <fieldset style="font-weight: bold;" class="input">
+                Side Image {{ form.side_image }}
             </fieldset>
-            <fieldset>
-                {{ form.back_image }}
+            <fieldset style="font-weight: bold;" class="input">
+                Back Image {{ form.back_image }}
             </fieldset>
             <br>
         <button type="submit" id="contact-submit">Create</button>

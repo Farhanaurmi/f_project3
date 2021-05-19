@@ -6,9 +6,116 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/driver.css' %}">
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <style>
+        .dropbtn {
+          background-color: #f3f3f3;
+          color: rgb(0, 0, 0);
+          border: 1px solid #000000;
+          
+          padding: 10px;
+          font-size: 16px;
+          width: 100%;
+          cursor: pointer;
+        }
+        
+        .dropbtn:hover, .dropbtn:focus {
+          background-color: #e0e0e0;
+        }
+        
+        .dropdown {
+            width: 100%;
+          display: inline-block;
+        }
+        
+        .dropdown-content {
+          display: none;
+          
+          background-color: #e0e0e0;
+          color: black;
+          min-width: 100%;
+          overflow: auto;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+        
+        .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+        }
+        
+        .dropdown a:hover {background-color: #ddd;}
+        
+        .show {display: block;}
+
+        .input3{
+            font-size: medium;
+            padding-left: 20px;
+        }
+        </style>
     <title>Safar Admin Panel</title>
 </head>
 <body>
+
+  <section>
+    <h1>Customer List</h1><br>
+    
+      <a href="/" class="homebtn"><i class="fa fa-home fa-3x fa-inverse" aria-hidden="true" id="ic"></i></a>
+    
+    <br><br>
+    <div>
+      <form method="GET">
+          {{ form2.form }}
+          <button type="submit" 
+          style="	cursor:pointer;
+          width:25%;
+          border:none;
+          background:#2E8B57;
+          color:#FFF;
+          margin-top: 20px;
+          margin-left: 36%;
+          padding:10px;
+          font-size:15px;">Filter</button>
+      </form>
+
+    </div>
+   <br><br><br><br><br><br>
+
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="1">
+        <div class="tbl-header">
+            <thead>
+                <tr>
+                  <th>User Id</th>
+                  <th>Name</th>
+                  <th>Mobile number</th>
+                  <th>Wallet amount</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+            </div>
+        <tbody>
+          {% for i in customerusers %}
+        <tr>
+          <td>{{ i.User_Id }}</td>
+          <td>{{ i.user_name }}</td> 
+          <td>{{ i.mobile_no }}</td> 
+          <td>{{ i.wallet_amount }}</td>  
+          <td>{{ i.email_id }}</td>
+
+        </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+  
     
     <div class="container">  
           
@@ -17,10 +124,26 @@
             <br>
             {% csrf_token %}
             <fieldset>
-                {{ form.coupon|attr:"placeholder: Enter Coupon code" }}
+                {{ form.code|attr:"placeholder: Enter Coupon code" }}
+            </fieldset>
+
+            <fieldset>
+                <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn">All User List</button>
+                    <div id="myDropdown" class="dropdown-content">
+                  {{ form.user|add_class:'input3' }}
+                    </div>
+                  </div>
+            </fieldset>
+
+            <fieldset>
+                {{ form.amount|add_class:'input'|attr:"placeholder: Enter Discount Amount" }}
             </fieldset>
             <fieldset>
-                {{ form.date|attr:"placeholder: Date" }}
+                {{ form.valid_from|attr:"placeholder: Enter Valid From date" }}
+            </fieldset>
+            <fieldset>
+                {{ form.valid_up_to|attr:"placeholder: Enter Valid up to date" }}
             </fieldset>
         <button type="submit" id="contact-submit">Create</button>
         
@@ -32,6 +155,11 @@
 
         
       </div>
-
+      <script>
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        </script>
 </body>
 </html>

@@ -14,8 +14,8 @@ class DriverSerializer(serializers.ModelSerializer):
 class CustomerUserSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model=CustomerUser
-        fields=['User_Id','user_name','mobile_no','wallet_amount','email_id']
+        model= CustomerUser
+        fields='__all__'
 
 class VehicleSerializer(serializers.ModelSerializer):
 
@@ -28,7 +28,7 @@ class BookingDetailsSerializer(serializers.ModelSerializer):
     assign_driver = DriverSerializer(read_only=True)
     class Meta:
         model=BookingDetails
-        fields=['booking_id','trip_type','pickup_point','Pickup_date_time','drop_point','drop_date','selected_car','name','mobile_no','user_id','approx_km_travelling','coupon','coupon_discount_amount','fare','advance_payment_medium','cash_drop_point','transaction_no','assign_driver']                                                                                                                            
+        fields=['booking_id','trip_type','area','pickup_point','Pickup_date_time','drop_point','drop_date','selected_car','name','mobile_no','user_id','approx_km_travelling','coupon','coupon_discount_amount','fare','advance_payment_medium','cash_drop_point','transaction_no','assign_driver','reject']                                                                                                                            
 
 class BookingHistorySerializer(serializers.ModelSerializer):
 
@@ -44,7 +44,13 @@ class NotificationSerializer(serializers.ModelSerializer):
         fields=['id','title','date','description','type']
 
 class CouponsSerializer(serializers.ModelSerializer):
-
+    user = CustomerUserSerializer(read_only=True, many=True)
     class Meta:
         model=Coupons
-        fields=['id','date','coupon']
+        fields=['id','code','amount','valid_from','valid_up_to','user']
+
+class ContactSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model=Contact
+        fields=['phone','email']

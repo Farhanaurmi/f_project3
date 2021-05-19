@@ -1,4 +1,3 @@
-
 {% load static %}
 {% load widget_tweaks %}
 <html lang="en">
@@ -7,28 +6,100 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/driver.css' %}">
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <title>Safar Admin Panel</title>
 </head>
 <body>
-    
-    <div class="container">  
-          
-          <form method="POST" class="container" id="contact">
-            <h3>Assign Driver Driver</h3>
-            <br>
-            {% csrf_token %}
-            <fieldset>
-                {{ form.assign_driver|add_class:'input' }}
-            </fieldset>
 
-            <br>
-        <button type="submit" id="contact-submit">Accept</button>
-        
-            <a href="/bookingrequest" id="backbtn">Back</a>
-        
+    <section>
+
+        <h1>Driver List</h1><br>
+    <div style="display: inline;">
+    <a href="/" class="homebtn"><i class="fa fa-home fa-3x fa-inverse" aria-hidden="true" id="ic"></i></a>
+  </div>
+  <br><br>
+      <div>
+        <form method="GET">
+            {{ form2.form }}
+            <button type="submit" 
+            style="	cursor:pointer;
+            width:25%;
+            border:none;
+            background:#2E8B57;
+            color:#FFF;
+            margin-top: 20px;
+            margin-left: 36%;
+            padding:10px;
+            font-size:15px;">Filter</button>
         </form>
-     
-      </div>
 
+      </div>
+       
+
+       <br><br><br>
+
+        
+        <div class="tbl-content">
+          <table cellpadding="0" cellspacing="0" border="1">
+            <div class="tbl-header">
+                <thead>
+                    <tr>
+                      <th>Option</th>
+                      <th>name</th>
+                      <th>phone</th>
+                      <th>pin code</th>
+                      <th>mohalla/village</th>
+                      <th>district</th>
+                      <th>state</th>
+                      <th>vehicle reg no</th>
+                      <th>vehicle brand</th>
+                      <th>vehicle model</th>
+                      <th>insurance validity</th>
+                      <th>insurance type</th>
+                      <th>registration year</th>
+                      <th>driven(km)</th>
+                      <th>status</th>
+
+                    </tr>
+                  </thead>
+                </div>
+            <tbody>
+              {% for i in drivers %}
+            <tr>
+              <td><a href="{% url 'assigndriver2' pk i.unid %}"> Assign </a></td>
+              <td>{{ i.driver_name }}</td> 
+              <td>{{ i.mobile_no }}</td> 
+              <td>{{ i.pin_code }}</td> 
+              <td>{{ i.mohalla_or_village }}</td> 
+              <td>{{ i.district }}</td>
+              <td>{{ i.state }}</td> 
+              <td>{{ i.vehicle_registration_no }}</td> 
+              <td>{{ i.vehicle_brand }}</td> 
+              <td>{{ i.vehicle_model }}</td> 
+              <td>{{ i.insurance_validity }}</td> 
+              <td>{{ i.insurance_type }}</td> 
+              <td>{{ i.registration_year }}</td> 
+              <td>{{ i.km_driven }}</td> 
+              <td>{{ i.status }}</td> 
+            </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      
+<script>
+    // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
 </body>
 </html>

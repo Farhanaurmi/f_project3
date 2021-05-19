@@ -18,20 +18,22 @@
           <a href="/" class="homebtn"><i class="fa fa-home fa-3x fa-inverse" aria-hidden="true" id="ic"></i></a>
         
         <br><br>
-        
-        <div class="wrap">
-          <div class="search">
-            <form method="GET">
-              <input name="q" type="text" class="searchTerm" placeholder="Search with username">
-              <br>
-              <br>
-              <button type="submit" class="searchButton">
-                <i class="fa fa-search"></i>
-             </button>
-            </form>
-             
-          </div>
-       </div>
+        <div>
+          <form method="GET">
+              {{ form2.form }}
+              <button type="submit" 
+              style="	cursor:pointer;
+              width:25%;
+              border:none;
+              background:#2E8B57;
+              color:#FFF;
+              margin-top: 20px;
+              margin-left: 36%;
+              padding:10px;
+              font-size:15px;">Filter</button>
+          </form>
+  
+        </div>
        <br><br><br><br><br><br>
 
         <div class="tbl-content">
@@ -39,6 +41,7 @@
             <div class="tbl-header">
                 <thead>
                     <tr>
+                      <th>User Id</th>
                       <th>Name</th>
                       <th>Mobile number</th>
                       <th>Wallet amount</th>
@@ -51,13 +54,13 @@
             <tbody>
               {% for i in customerusers %}
             <tr>
-
+              <td>{{ i.User_Id }}</td>
               <td>{{ i.user_name }}</td> 
               <td>{{ i.mobile_no }}</td> 
               <td>{{ i.wallet_amount }}</td>  
               <td>{{ i.email_id }}</td>
-              <td><a href="{% url 'edituser' i.User_Id %}">edit</td>
-                <td> <a href="{% url 'deletecustomer' i.User_Id %}">delete</a></td>
+              <td><a href="{% url 'edituser' i.id %}">edit</td>
+                <td> <a href="{% url 'deletecustomer' i.id %}">delete</a></td>
 
             </tr>
               {% endfor %}

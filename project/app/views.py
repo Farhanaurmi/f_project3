@@ -9,6 +9,8 @@ from .forms import *
 from .decorators import *
 from django.db.models import Q
 import datetime
+from django.utils.crypto import get_random_string
+from .filters import *
 
 
 ######LOGIN & REGISTER#######
@@ -59,13 +61,14 @@ def signupuser(request):
 @login_required
 def home(request):
     driver=Driver.objects.all().filter(status='UNDER VARIFICATION').count()
-    booking_req= BookingDetails.objects.all().filter(assign_driver=None).count()
+    booking_req= BookingDetails.objects.all().filter(assign_driver=None).filter(reject=False).count()
     return render(request,'app/home.html',{'driver':driver,'booking_req':booking_req})
 
 
 #######ALL THE PAGE FUNCTIONALITY########
 
 @login_required
+@manager_only
 def driver(request):
     if 'q' in request.GET:
         q=request.GET['q']
@@ -90,10 +93,21 @@ def vehicle(request):
 def bookinghistory(request):
     if 'q' in request.GET:
         q=request.GET['q']
+        bookingdetailss=BookingDetails.objects.filter(booking_id__icontains=q)
+    else:
+        bookingdetailss=BookingDetails.objects.all()
+    return render(request,'app/bookinghistory.html' , {'bookingdetailss':bookingdetailss})
+
+
+@login_required
+@manager_only
+def aftercompleted(request):
+    if 'q' in request.GET:
+        q=request.GET['q']
         bookinghistorys=BookingHistory.objects.filter(trip_type__icontains=q)
     else:
         bookinghistorys=BookingHistory.objects.all()
-    return render(request,'app/bookinghistory.html' , {'bookinghistorys':bookinghistorys})
+    return render(request,'app/aftercompleted.html' , {'bookinghistorys':bookinghistorys})
 
 
 @login_required
@@ -105,12 +119,15 @@ def bookingdetails(request):
 @login_required
 @manager_only
 def customeruser(request):
-    if 'q' in request.GET:
-        q=request.GET['q']
-        customerusers=CustomerUser.objects.filter(user_name__icontains=q)
-    else:
-        customerusers=CustomerUser.objects.all()
-    return render(request,'app/customeruser.html' , {'customerusers':customerusers})
+    temp=CustomerUser.objects.all()
+    form2= OrderFilter2(request.GET, queryset=temp)
+    customerusers = form2.qs
+
+    return render(request,'app/customeruser.html' , {'customerusers':customerusers,'form2':form2})
+
+
+
+    
 
 @login_required
 @manager_only
@@ -136,6 +153,23 @@ def coupons(request):
     coup=Coupons.objects.all()
     return render(request,'app/coupons.html', {'coup':coup})
 
+@login_required
+@manager_only
+def brand(request):
+    bran=Brand.objects.all()
+    return render(request,'app/brand.html', {'bran':bran})
+
+@login_required
+@manager_only
+def brandmodel(request):
+    branm=BrandModel.objects.all()
+    return render(request,'app/brandmodel.html', {'branm':branm})
+
+@login_required
+@manager_only
+def insurance(request):
+    insu=Insurance.objects.all()
+    return render(request,'app/insurance.html', {'insu':insu})
 
 @login_required
 @manager_only
@@ -152,7 +186,7 @@ def drivers_verify(request):
 @login_required
 @manager_only
 def booking_request(request):
-    bookingdetailss=BookingDetails.objects.all().filter(assign_driver=None)
+    bookingdetailss=BookingDetails.objects.all().filter(assign_driver=None).filter(reject=False)
     return render(request,'app/booking_request.html' , {'bookingdetailss':bookingdetailss})
 
 
@@ -160,11 +194,15 @@ def profile(request):
     return render(request, 'app/profile.html')
 
 
+@login_required
+@manager_only
 def today(request):
     date=datetime.date.today()
     bookingdetailss=BookingDetails.objects.all().filter(drop_date=date)
     return render(request,'app/today.html' , {'bookingdetailss':bookingdetailss})
 
+@login_required
+@manager_only
 def week(request):
     date=datetime.date.today()
     start_week = date - datetime.timedelta(date.weekday())
@@ -172,6 +210,8 @@ def week(request):
     bookingdetailss=BookingDetails.objects.all().filter(drop_date__range=[start_week, end_week])
     return render(request,'app/week.html' , {'bookingdetailss':bookingdetailss})
 
+@login_required
+@manager_only
 def month(request):
     date=datetime.date.today()
     start_week = date - datetime.timedelta(date.weekday())
@@ -187,9 +227,9 @@ def month(request):
 @manager_only
 def editdriver(request, pk):
     driver = Driver.objects.get(driver_id=pk)
-    form = DriverFrom(instance=driver)
+    form = DriverEditFrom(instance=driver)
     if request.method == 'POST':
-        form = DriverFrom(request.POST, instance=driver)
+        form = DriverEditFrom(request.POST, instance=driver)
         if form.is_valid():
             form.save()
             return redirect('drivers_verify')
@@ -198,7 +238,7 @@ def editdriver(request, pk):
 @login_required
 @manager_only
 def edituser(request, pk):
-    customeruser = CustomerUser.objects.get(User_Id=pk)
+    customeruser = CustomerUser.objects.get(id=pk)
     form = CustomerUserFrom(instance=customeruser)
     if request.method == 'POST':
         form = CustomerUserFrom(request.POST, instance=customeruser)
@@ -208,16 +248,45 @@ def edituser(request, pk):
     return render(request,'app/edituser.html', {'form':form})
 
 
+@login_required
+@manager_only
 def assigndriver(request, pk):
     booking = BookingDetails.objects.get(booking_id=pk)
     form = AssignDriverForm(instance=booking)
+    temp=Driver.objects.all()
+    form2= OrderFilter(request.GET, queryset=temp)
+    drivers = form2.qs
+
     if request.method == 'POST':
         form = AssignDriverForm(request.POST, instance=booking)
         if form.is_valid():
             form.save()
             return redirect('booking_request')
-    return render(request,'app/assign_driver.html', {'form':form})
+    return render(request,'app/assign_driver.html', {'form':form,'form2': form2,'drivers': drivers,'pk':pk})
+
+def assigndriver2(request, pk, pk2):
+    booking = BookingDetails.objects.get(booking_id=pk)
+    driver= Driver.objects.get(driver_id=pk2)
+    booking.assign_driver = driver
+    booking.save()
+    return redirect('booking_request')
   
+
+
+@login_required
+@manager_only
+def rejectdriver(request, pk):
+    booking = BookingDetails.objects.get(booking_id=pk)
+    form = RejectDriverForm(instance=booking)
+    if request.method == 'POST':
+        form = RejectDriverForm(request.POST, instance=booking)
+        if form.is_valid():
+            form.save()
+            return redirect('booking_request')
+    return render(request,'app/rejectdriver.html', {'form':form})
+  
+
+
 
 ##########DELETE############
 
@@ -267,7 +336,7 @@ def deletebookingdetails(request,pk):
 @login_required
 @manager_only
 def deletecustomer(request,pk):
-    obj=get_object_or_404(CustomerUser,User_Id=pk)
+    obj=get_object_or_404(CustomerUser,id=pk)
     if request.method =='GET':
         obj.delete()
         return redirect('customeruser')
@@ -280,6 +349,19 @@ def deletenotification(request,pk):
     if request.method =='GET':
         obj.delete()
         return redirect('notification')
+
+
+@login_required
+@manager_only
+def editcontact(request):
+    temp = Contact.objects.get(id=1)
+    form = ContactEditForm(instance=temp)
+    if request.method == 'POST':
+        form = ContactEditForm(request.POST, instance=temp)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    return render(request,'app/editcontact.html', {'form':form})
 
 
 
@@ -300,13 +382,17 @@ def createdriver(request):
 @login_required
 @manager_only
 def createcoupons(request):
+    temp=CustomerUser.objects.all()
+    form2= OrderFilter2(request.GET, queryset=temp)
+    customerusers = form2.qs
     form = CouponsFrom()
     if request.method == 'POST':
         form = CouponsFrom(request.POST)
+        
         if form.is_valid():
             form.save()
             return redirect('coupons')
-    return render(request,'app/createcoupons.html', {'form':form})
+    return render(request,'app/createcoupons.html', {'form':form,'form2':form2,'customerusers':customerusers})
 
 
 
@@ -340,5 +426,51 @@ def createnotification(request):
     return render(request,'app/createnotification.html', {'form':form})
 
 
+@login_required
+@manager_only
+def createbrand(request):
+    form = BrandFrom()
+    if request.method == 'POST':
+        form = BrandFrom(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('brand')
+    return render(request,'app/createbrand.html', {'form':form})
+
+
+@login_required
+@manager_only
+def createbrandmodel(request):
+    form = BrandModelFrom()
+    if request.method == 'POST':
+        form = BrandModelFrom(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('brandmodel')
+    return render(request,'app/createbrandmodel.html', {'form':form})
+
+@login_required
+@manager_only
+def createinsurance(request):
+    form = InsuranceFrom()
+    if request.method == 'POST':
+        form = InsuranceFrom(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('insurance')
+    return render(request,'app/createinsurance.html', {'form':form})
+
+
+@login_required
+@manager_only
+def createfrompoint(request):
+    form = FrompointForm()
+    form2=Frompoint.objects.all()
+    if request.method == 'POST':
+        form = FrompointForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('createfrompoint')
+    return render(request,'app/createfrompoint.html', {'form':form,'form2':form2})
 
 

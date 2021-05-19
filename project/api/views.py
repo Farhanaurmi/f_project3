@@ -50,7 +50,7 @@ class BookingHistoryList(generics.ListCreateAPIView):
         serializer.save()
 
 
-class notificationList(generics.ListCreateAPIView):
+class notificationList(generics.ListAPIView):
     queryset=Notification.objects.all()
     serializer_class=NotificationSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -58,9 +58,17 @@ class notificationList(generics.ListCreateAPIView):
         serializer.save()
 
 
-class CouponsList(generics.ListCreateAPIView):
+class CouponsList(generics.ListAPIView):
     queryset=Coupons.objects.all()
     serializer_class=CouponsSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    def perform_create(self, serializer):
+        serializer.save()
+
+
+class contactList(generics.ListAPIView):
+    queryset=Contact.objects.all()
+    serializer_class=ContactSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     def perform_create(self, serializer):
         serializer.save()

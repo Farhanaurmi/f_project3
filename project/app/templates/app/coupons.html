@@ -29,8 +29,11 @@
             <div class="tbl-header">
                 <thead>
                     <tr>
-                      <th>Date</th>
-                      <th>Coupon</th>
+                      <th>Code</th>
+                      <th>user/'s</th>
+                      <th>Discount Amount</th>
+                      <th>Valid From</th>
+                      <th>Valid up to</th>
                       <th>Delete</th>
                     </tr>
                   </thead>
@@ -38,8 +41,16 @@
             <tbody>
               {% for i in coup %}
             <tr>
-              <td>{{ i.date }}</td> 
-              <td>{{ i.coupon }}</td> 
+              <td>{{ i.code }}</td> 
+
+              <td>{% for j in i.user.all %}
+                ○ {{ j }} <br>
+                {% endfor %}
+              </td>
+
+              <td>{{ i.amount }}</td> 
+              <td>{{ i.valid_from }}</td> 
+              <td>{{ i.valid_up_to }}</td> 
               <td><a href="{% url 'deletecoupons' i.id %}">delete</a></td>  
 
             </tr>

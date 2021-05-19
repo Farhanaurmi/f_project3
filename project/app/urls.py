@@ -22,17 +22,35 @@ urlpatterns = [
     path('notification/<int:pk>/delete', views.deletenotification, name='deletenotification'),  
     path('coupons', views.coupons, name='coupons'),
     path('createcoupons', views.createcoupons, name='createcoupons'), 
+
+    path('editcontact', views.editcontact, name='editcontact'), 
+    path('createfrompoint', views.createfrompoint, name='createfrompoint'), 
+
+    path('brand', views.brand, name='brand'),
+    path('createbrand', views.createbrand, name='createbrand'), 
+
+    path('model', views.brandmodel, name='brandmodel'),
+    path('createmodel', views.createbrandmodel, name='createbrandmodel'), 
+
+    path('insurance', views.insurance, name='insurance'),
+    path('createinsurance', views.createinsurance, name='createinsurance'), 
+
     path('coupons/<int:pk>/delete', views.deletecoupons, name='deletecoupons'),
     path('bookinghistory/<int:pk>/delete', views.deletebookinghistory, name='deletebookinghistory'),
     path('vehicle/<int:pk>/delete', views.deletevehicle, name='deletevehicle'),
     path('bookingdetails/<int:pk>/delete', views.deletebookingdetails, name='deletebookingdetails'),
     path('customer/<int:pk>/delete', views.deletecustomer, name='deletecustomer'),
     path('driversverify', views.drivers_verify, name='drivers_verify'),
-    path('bookingrequest', views.booking_request, name='booking_request'), 
-    path('assigndriver/<int:pk>', views.assigndriver, name='assigndriver'),   
+    path('bookingrequest', views.booking_request, name='booking_request'),
+
+    path('assigndriver/<int:pk>', views.assigndriver, name='assigndriver'),
+    path('assigndriver/<int:pk>/<int:pk2>', views.assigndriver2, name='assigndriver2'),
+
+    path('rejectdriver/<int:pk>', views.rejectdriver, name='rejectdriver'),   
     path('profile', views.profile, name='profile'),
     path('today', views.today, name='today'),
     path('week', views.week, name='week'), 
-    path('month', views.month, name='month'), 
+    path('month', views.month, name='month'),
+    path('aftercompleted', views.aftercompleted, name='aftercompleted') 
 
 ]

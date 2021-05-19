@@ -1,0 +1,69 @@
+{% load static %}
+{% load widget_tweaks %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/driver.css' %}">
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <title>Safar Admin Panel</title>
+</head>
+<body>
+
+    <section>
+
+        <h1>Area List</h1><br>
+    <div style="display: inline;">
+    <a href="/" class="homebtn"><i class="fa fa-home fa-3x fa-inverse" aria-hidden="true" id="ic"></i></a>
+  </div>     
+        <div class="tbl-content">
+          <table cellpadding="0" cellspacing="0" border="1">
+            <div class="tbl-header">
+                <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Area</th>
+                    </tr>
+                  </thead>
+                </div>
+            <tbody>
+              {% for i in form2 %}
+            <tr>
+              <td>{{ i.id }}</td>
+              <td>{{ i.area }}</td> 
+            </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <div class="container">
+
+
+          <form method="POST" class="container" id="contact" style="margin-top: -50px;">
+            <h3>Add Area</h3>
+            <br>
+            {% csrf_token %}
+            <fieldset>
+                {{ form.area|add_class:'input' }}
+            </fieldset>
+
+            <br>
+        <button type="submit" id="contact-submit">Accept</button>
+      
+      
+<script>
+    // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
+</body>
+</html>

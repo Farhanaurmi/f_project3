@@ -1,0 +1,73 @@
+{% load static %}
+{% load widget_tweaks %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <style>
+        .test2{
+        cursor:pointer;
+        width:100%;
+        border:none;
+        background:#2E8B57;
+        color:#FFF;
+        margin:0 0 5px;
+        padding:10px;
+        font-size:15px;
+    }
+</style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $(".check").click(function(){
+        $(".myCheck").prop("checked", true);
+    });
+    $(".uncheck").click(function(){
+        $(".myCheck").prop("checked", false);
+    });
+});
+</script>
+
+    <title>Safar Admin Panel</title>
+</head>
+
+<body>
+
+      <div class="container">
+          <form method="POST" class="container" id="contact" style="margin-top: -50px;">
+            <br>
+            {% csrf_token %}
+            
+<style>
+    .myCheck[type=checkbox]{
+        background-color: white;
+        border-color: white;
+        color: white;
+        background:white;
+        border-radius: 100%;
+        width: 0px;
+    }
+</style>
+
+            <fieldset>
+                <h6>{{ form.reject|add_class:'myCheck' }}</h6><h1> Are you sure you want to reject it?</h1>
+            </fieldset>
+
+            <br>
+            <button type="submit" type="button" class="check">Yes</button>
+            <button type="submit" type="button" class="uncheck test2">No</button> 
+
+      
+      
+<script>
+    // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+$(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
+</body>
+</html>
