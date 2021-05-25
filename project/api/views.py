@@ -8,7 +8,7 @@ from .Serializers import *
 from django.http import HttpResponse
 
 def home(request):
-    return JsonResponse({'Driver':'/api/driver','Customer':'/api/customeruser','vehicle':'/api/vehicle','bookingdetails':'/api/bookingdetails','bookinghistory':'/api/bookinghistory','notification':'/api/notification','coupons':'/api/coupons',})
+    return JsonResponse({'Driver':'/api/driver','Customer':'/api/customeruser','customeruser wallet update with copoun matches':'customeruser/<int:pk>','vehicle':'/api/vehicle','bookingdetails':'/api/bookingdetails','bookinghistory':'/api/bookinghistory','notification':'/api/notification','coupons':'/api/coupons','contact':'contact'})
 
 
 
